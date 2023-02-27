@@ -4,8 +4,8 @@ clear
 print -p "This will install your basic Server settings"
 
 # update and upgrade Distro
-sudo apt update
-sudo apt upgrade
+apt update
+apt upgrade
 
 # Add user
 adduser imperator
