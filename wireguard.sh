@@ -75,8 +75,6 @@ ExecStart=/bin/systemctl restart wg-quick@wg0.service
 RequiredBy=wgui.path
 EOF
 
-
-
 cat <<EOF > /etc/systemd/system/wgui.path
 [Unit]
 Description=Watch /etc/wireguard/wg0.conf for changes
@@ -88,7 +86,12 @@ PathModified=/etc/wireguard/wg0.conf
 WantedBy=multi-user.target
 EOF
 
-# Service activate and start
+# Activate Services and start
+touch /etc/wireguard/wg0.conf
+systemctl enable wgui.{path,service} wg-quick@wg0.service wgui-web.service
+systemctl start wgui.{path,service}
+
+# End 
 clear
 echo " Please check if the correct external ip is mentioned"
 echo " at /etc/wireguard/start-wgui.sh"
